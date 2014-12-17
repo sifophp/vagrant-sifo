@@ -1,0 +1,4 @@
+sifo_instance::domain: sifo-web.local
+sifo_instance::static: static.sifo-web.local
+sifo_instance::name: sifoweb
+sifo_instance::docroot: /www/sifo/instances/sifoweb/public/root

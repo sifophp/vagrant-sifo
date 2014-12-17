@@ -1,0 +1,9 @@
+---
+:backends: yaml
+:yaml:
+    :datadir: "%{settings::manifestdir}/hieradata"
+:hierarchy:
+   - "%{::fqdn}"
+   - common
+:logger: console
+
