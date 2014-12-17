@@ -4,8 +4,8 @@
 Vagrant.configure("2") do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "centos7_minimal"
-  config.vm.box_url = "https://f0fff3908f081cb6461b407be80daf97f07ac418.googledrive.com/host/0BwtuV7VyVTSkUG1PM3pCeDJ4dVE/centos7.box"
+  config.vm.box = "centos7_minimal_puppet_vbfs"
+  config.vm.box_url = "https://dl.dropboxusercontent.com/s/w3lbekm7eunrskm/centos-7.0-x86_64.box"
 
   # Boot with a GUI so you can see the screen. (Default is headless)
   #config.vm.boot_mode = :gui
