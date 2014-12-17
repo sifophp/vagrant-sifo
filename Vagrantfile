@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
   # network interface) by any external networks.
 
   config.vm.network :private_network, ip: "192.168.33.10"
-  config.vm.hostname = "app.sifo.local"
+  config.vm.hostname = "sifo-web.local"
 
   # Assign this VM to a bridged network, allowing you to connect directly to a
   # network using the host's network device. This makes the VM appear as another
@@ -35,25 +35,24 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "./shared/logs", "/logs"
   config.vm.provision :shell, :path => "./shell/install.sh"
 
-  # You need the librarian_puppet plugin.
-  # Run from the command line: vagrant plugin install vagrant-librarian-puppet
-  config.librarian_puppet.puppetfile_dir = "puppet"
-  
-
-
   # Configure VM to use host DNS to resolve hostnames.
-  config.vm.provider "virtualbox" do |vb|
-    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
-  end
+  # config.vm.provider "virtualbox" do |vb|
+  #  vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+  #  vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+  # end
 
-  config.vm.provision :puppet,
-    :options => ["--fileserverconfig=fileserver.conf"],
-    :facter => { "fqdn" => "vagrant.vagrantup.com" }  do |puppet|
-       puppet.manifests_path = "puppet/manifests"
-       puppet.working_directory = "/etc/puppet/"
-       puppet.manifest_file = "site.pp"
-       puppet.hiera_config_path = "puppet/manifests/hiera.yaml"
+  config.vm.provision "puppet" do |puppet|
+      puppet.manifest_file = "nodes"
+      puppet.manifests_path = "puppet/manifests/"
+      puppet.working_directory = "/etc/puppet/"
+      puppet.hiera_config_path = 'puppet/manifests/hiera.yaml'
+      puppet.options = [
+          '--verbose',
+          '--report',
+          '--show_diff',
+          '--pluginsync',
+          '--summarize',
+      ]
   end
 
 end

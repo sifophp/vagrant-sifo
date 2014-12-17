@@ -1,3 +1,4 @@
 node 'sifo-web.local' {
-	# include ::sifo_instance
+	include git
+	include sifo_app
 }

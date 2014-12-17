@@ -6,4 +6,3 @@
    - "%{::fqdn}"
    - common
 :logger: console
-
